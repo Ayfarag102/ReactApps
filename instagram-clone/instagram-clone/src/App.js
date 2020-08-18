@@ -188,20 +188,37 @@ function App() {
 
       <div className="app__posts">
         <div className="app__postsLeft">
-          {posts.map(({ id, post }) => (
-            <Post
-              key={id}
-              postId={id}
-              user={user}
-              name={post.name}
-              username={post.username}
-              imageUrl={post.imageUrl}
-              caption={post.caption}
-            />
-          ))}
+          {posts ? (
+            <h1>
+              No Posts… Add posts now
+              <span role="img" aria-label="" aria-labelledby="">
+                😃
+              </span>
+            </h1>
+          ) : (
+            posts.map(({ id, post }) => (
+              <Post
+                key={id}
+                postId={id}
+                user={user}
+                name={post.name}
+                username={post.username}
+                imageUrl={post.imageUrl}
+                caption={post.caption}
+              />
+            ))
+          )}
         </div>
 
         <div className="app__postsRight">
+          <div className="app__postsTitle">
+            <h5>
+              Other Instagram Accounts You Can Follow
+              <span role="img" aria-label="" aria-labelledby="">
+                😎
+              </span>
+            </h5>
+          </div>
           <InstagramEmbed
             url="https://instagr.am/p/CECaRt4AFmj/"
             maxWidth={320}
@@ -215,7 +232,7 @@ function App() {
             onFailure={() => {}}
           />
           <InstagramEmbed
-            url="https://instagr.amm/p/CC6GpbXANpM/"
+            url="https://instagr.am/p/CC6GpbXANpM/"
             maxWidth={320}
             hideCaption={false}
             containerTagName="div"

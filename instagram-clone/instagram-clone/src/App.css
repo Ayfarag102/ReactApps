@@ -36,6 +36,10 @@
 .app__postsRight {
   margin-left: 20px;
 }
+
+.app__postsTitle {
+  margin-bottom: 10px;
+}
 .app__signin {
   display: flex;
   flex-direction: column;
