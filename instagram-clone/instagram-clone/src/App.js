@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./components/imageUpload";
+import InstagramEmbed from "react-instagram-embed";
 
 function getModalStyle() {
   const top = 50;
@@ -179,29 +180,43 @@ function App() {
           <Button onClick={() => auth.signOut()}>Logout</Button>
         ) : (
           <div className="app__loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
             <Button onClick={() => setOpen(true)}>Sign Up</Button>
           </div>
         )}
       </div>
 
-      <h6>Hello MXS Coding and Productions</h6>
-      <h6>
-        Let's build an Instagram Clone with React{" "}
-        <span role="img" aria-label="">
-          🚀
-        </span>
-      </h6>
+      <div className="app__posts">
+        <div className="app__postsLeft">
+          {posts.map(({ id, post }) => (
+            <Post
+              key={id}
+              postId={id}
+              user={user}
+              name={post.name}
+              username={post.username}
+              imageUrl={post.imageUrl}
+              caption={post.caption}
+            />
+          ))}
+        </div>
 
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id}
-          name={post.name}
-          username={post.username}
-          imageUrl={post.imageUrl}
-          caption={post.caption}
-        />
-      ))}
+        <div className="app__postsRight">
+          <InstagramEmbed
+            url="https://instagr.am/p/CD6yVSego4G/"
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+          />
+        </div>
+      </div>
+
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />
       ) : (
