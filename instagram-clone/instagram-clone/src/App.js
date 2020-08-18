@@ -5,6 +5,7 @@ import { db, auth } from "./firebase";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Input } from "@material-ui/core";
+import ImageUpload from "./components/imageUpload";
 
 function getModalStyle() {
   const top = 50;
@@ -64,15 +65,17 @@ function App() {
 
   useEffect(() => {
     //  this is where code runs
-    db.collection("posts").onSnapshot((snapshot) => {
-      // every time a post is added, this code fires...
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
-    });
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // every time a post is added, this code fires...
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
+      });
   }, []);
   const signUp = (event) => {
     event.preventDefault();
@@ -172,18 +175,17 @@ function App() {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       </div>
 
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="app__loginConatiner">
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
-        </div>
-      )}
-
-      <h1>Hello MXS Coding and Productions</h1>
+      <h6>Hello MXS Coding and Productions</h6>
       <h6>
         Let's build an Instagram Clone with React{" "}
         <span role="img" aria-label="">
@@ -200,10 +202,11 @@ function App() {
           caption={post.caption}
         />
       ))}
-
-      {/*POSTS */}
-      {/*POSTS */}
-      {/*FOOTER */}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Login to upload</h3>
+      )}
     </div>
   );
 }
