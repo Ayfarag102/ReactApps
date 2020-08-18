@@ -188,26 +188,17 @@ function App() {
 
       <div className="app__posts">
         <div className="app__postsLeft">
-          {posts ? (
-            <h1>
-              No Posts… Add posts now
-              <span role="img" aria-label="" aria-labelledby="">
-                😃
-              </span>
-            </h1>
-          ) : (
-            posts.map(({ id, post }) => (
-              <Post
-                key={id}
-                postId={id}
-                user={user}
-                name={post.name}
-                username={post.username}
-                imageUrl={post.imageUrl}
-                caption={post.caption}
-              />
-            ))
-          )}
+          {posts.map(({ id, post }) => (
+            <Post
+              key={id}
+              postId={id}
+              user={user}
+              name={post.name}
+              username={post.username}
+              imageUrl={post.imageUrl}
+              caption={post.caption}
+            />
+          ))}
         </div>
 
         <div className="app__postsRight">
