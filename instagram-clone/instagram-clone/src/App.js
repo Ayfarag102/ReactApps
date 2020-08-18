@@ -203,7 +203,19 @@ function App() {
 
         <div className="app__postsRight">
           <InstagramEmbed
-            url="https://instagr.am/p/CD6yVSego4G/"
+            url="https://instagr.am/p/CECaRt4AFmj/"
+            maxWidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+          />
+          <InstagramEmbed
+            url="https://instagr.amm/p/CC6GpbXANpM/"
             maxWidth={320}
             hideCaption={false}
             containerTagName="div"
@@ -220,7 +232,9 @@ function App() {
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />
       ) : (
-        <h3>Login to upload</h3>
+        <center>
+          <h3>Login to upload</h3>
+        </center>
       )}
     </div>
   );
