@@ -40,7 +40,13 @@
 }
 
 .header .wrapper .callToActions li {
+  display: inline-block;
+  margin-right: 1.5rem;
   list-style-type: none;
+}
+
+.header .wrapper .callToActions li:last-child {
+  margin-right: 0;
 }
 
 .header .wrapper .callToActions li a {

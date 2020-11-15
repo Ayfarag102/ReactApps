@@ -1,0 +1,28 @@
+.signin {
+  border: 1px solid black;
+  display: block;
+  width: 100%;
+  max-width: 40.0rem;
+  margin: 4rem auto 6rem;
+}
+
+.signin .signin__wrapper {
+  padding: 10px;
+}
+
+.signin .signin__wrapper h2 {
+  display: block;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.signin .signin__wrapper .signin__wrapper__formWrap__socialSignIn {
+  margin: 3rem auto 0;
+}
+/*# sourceMappingURL=styles.css.map */
