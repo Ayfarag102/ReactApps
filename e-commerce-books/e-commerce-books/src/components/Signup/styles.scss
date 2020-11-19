@@ -1,34 +1,4 @@
 //  Using BEM (Block__Element__Modifier) format
-.signup {
-  border: 1px solid black;
-  display: block;
-  width: 100%;
-  max-width: 40.0rem;
-  margin: 4rem auto 6rem;
-
-  .signup__wrapper {
-    padding: 10px;
-
-    h2 {
-      display: block;
-      font-weight: 400;
-      font-size: 2.2rem;
-      line-height: 1;
-      margin: 0 auto;
-      padding: 0;
-      text-align: center;
-      text-transform: uppercase;
-      width: 100%;
-    }
-
-    .signup__wrapper__formWrap{
+.signup__wrapper__formWrap{
       margin:  3rem auto 0;
     }
-
-    .signin__wrapper__formWrap__emailSignUp {
-
-      margin: 3rem auto 0;
-
-    }
-  }
-}
