@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 import "./styles.scss";
 import Logo from "../../assets/MXS_Books_logo.png";
@@ -42,4 +44,8 @@ Header.defaultProps = {
   currentUser: null,
 };
 
-export default Header;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+export default connect(mapStateToProps, null)(Header);
