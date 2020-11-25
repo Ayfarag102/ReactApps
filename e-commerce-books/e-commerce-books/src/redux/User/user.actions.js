@@ -4,3 +4,5 @@ export const setCurrentUser = (user) => ({
   type: userTypes.SET_CURRENT_USER,
   payload: user,
 });
+
+// export const signInUser = ({ email, password }) => async (dispatch) => {};
