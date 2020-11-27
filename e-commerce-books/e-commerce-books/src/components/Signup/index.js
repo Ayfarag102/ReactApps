@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpUser, resetAllAuthForms } from "./../../redux/User/user.actions";
+import { signUpUserStart } from "./../../redux/User/user.actions";
 import "./styles.scss";
 import FormInput from "../forms/FormInput";
 import Button from "../forms/Button";
 import AuthWrapper from "./../AuthWrapper";
 
 const mapState = ({ user }) => ({
-  signUpSuccess: user.signUpSuccess,
-  signUpError: user.signUpError,
+  currentUser: user.currentUser,
+  userErr: user.userErr,
 });
 const Signup = (props) => {
-  const { signUpSuccess, signupError } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, userErr } = useSelector(mapState);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,18 +22,18 @@ const Signup = (props) => {
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    if (signUpSuccess) {
+    if (currentUser) {
       resetForm();
-      dispatch(resetAllAuthForms());
-      props.history.push("/");
+
+      history.push("/");
     }
-  }, [signUpSuccess]);
+  }, [currentUser]);
 
   useEffect(() => {
-    if (Array.isArray(signupError) && signupError.length > 0) {
-      setErrors(signupError);
+    if (Array.isArray(userErr) && userErr.length > 0) {
+      setErrors(userErr);
     }
-  }, [signupError]);
+  }, [userErr]);
 
   const resetForm = () => {
     setDisplayName("");
@@ -44,7 +45,7 @@ const Signup = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      signUpUser({
+      signUpUserStart({
         displayName,
         email,
         password,
@@ -109,4 +110,4 @@ const Signup = (props) => {
   );
 };
 
-export default withRouter(Signup);
+export default Signup;

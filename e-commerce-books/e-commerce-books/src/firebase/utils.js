@@ -10,7 +10,8 @@ export const firestore = firebase.firestore();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const handleUserProfile = async (userAuth, data) => {
+//  Check if user is saved/stored in our user collection on Firebase, otherwise we set them up in our collection
+export const handleUserProfile = async ({ userAuth, data }) => {
   if (!userAuth) return;
 
   const { uid } = userAuth;
@@ -32,4 +33,13 @@ export const handleUserProfile = async (userAuth, data) => {
     }
   }
   return userRef;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
